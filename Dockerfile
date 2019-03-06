@@ -1,8 +1,8 @@
-FROM python:alpine3.8
+FROM python:alpine3.9
 
 LABEL maintainer="Kacper Czarczyński <kacper.czarczynski@gmail.com>"
 
-ENV PGADMIN_VERSION 4.1
+ENV PGADMIN_VERSION 4.2
 ENV UID             1000
 ENV GID             50
 
@@ -37,7 +37,6 @@ RUN addgroup -g ${GID} -S pgadmin \
  && adduser -D -S -h /pgadmin -s /sbin/nologin -u ${UID} -G pgadmin pgadmin \
  && mkdir -p /data/config /data/logs /data/storage /data/sessions /data/misc \
  && chown -R ${UID}:${GID} /data \
- && cp /usr/bin/psql /usr/bin/pg_dump /usr/bin/pg_restore /usr/local/bin/ \
  && rm -rf /root/.cache
 
 COPY config_local.py /usr/local/lib/python3.7/site-packages/pgadmin4/
